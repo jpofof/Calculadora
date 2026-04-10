@@ -12,7 +12,6 @@ Este repositório contém um projeto prático desenvolvido para exercitar a lóg
 ##  Tecnologias Utilizadas
 * HTML5 para a estrutura.
 * JavaScript (ES6+) para a lógica e manipulação de elementos.
-* CSS3 (Estrutura básica nativa).
 
 ##  Como executar
 1. Clone o repositório: `git clone https://github.com/jpofof/Calculadora.git`
