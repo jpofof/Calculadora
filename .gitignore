@@ -1,0 +1,10 @@
+# Extensões do VS Code e configurações locais
+.vscode/
+
+# Arquivos temporários do Windows
+Thumbs.db
+Desktop.ini
+
+# Logs de erro do Node (caso use no futuro)
+node_modules/
+npm-debug.log*
