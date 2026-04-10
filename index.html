@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="João Pedro">
+    <title>JS - 2</title>
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- MÉDIA ARITMÉTICA -->
+    <!-- ========================= -->
+    <h3> Média Aritmética </h3>
+
+    <label> Número 1: </label>
+    <input type="text" id="med-num-1">
+
+    <label> Número 2: </label>
+    <input type="text" id="med-num-2">
+
+    <br><br>
+
+    <input type="button" value="Calcule a Média Aritmética dos Números Inseridos" onclick="MedArit()">
+
+    <br><br>
+
+    <label id="resultadoMedia"></label>
+
+    <!-- ========================= -->
+    <!-- POTÊNCIA -->
+    <!-- ========================= -->
+    <h3> Calculo de Potências </h3>
+
+    <input type="button" value="Calcular Potência" onclick="calcularPotencia()">
+
+    <br><br>
+
+    <!-- ========================= -->
+    <!-- ANO BISSEXTO -->
+    <!-- ========================= -->
+    <h3> Verificação de Ano </h3>
+
+    <label> Ano Atual: </label>
+    <input type="text" id="Ano-Atual">
+    <br><br>
+
+    <input type="button" value="Verificar se o Ano é Bissexto ou Não" onclick="verificacaobissexto()">
+
+    <br><br>
+
+    <p id="resultadoAno"></p>
+
+    <!-- ========================= -->
+    <!-- PAGAMENTOS -->
+    <!-- ========================= -->
+    <h3> Pagamentos </h3>
+
+    <label> Valor Unitário do Produto: </label>
+    <input type="text" id="valoruni">
+
+    <br><br>
+
+    <label> Quantidade do Produto: </label>
+    <input type="text" id="qtd">
+
+    <br><br>
+
+    <label> Formas de Pagamento </label>
+
+    <br><br>
+
+    <input type="radio" id="Pix" name="pagamento" value="Pix">
+    <label for="Pix">Pix</label>
+
+    <br><br>
+
+    <input type="radio" id="Débito" name="pagamento" value="Débito">
+    <label for="Débito">Débito</label>
+
+    <br><br>
+
+    <input type="radio" id="Crédito" name="pagamento" value="Crédito">
+    <label for="Crédito">Crédito</label>
+
+    <br><br>
+
+    <input type="button" value="Pagar" onclick="pagamentos()">
+
+    <br><br>
+
+    <p id="resultado"></p>
+
+    <!-- ========================= -->
+    <!-- CLASSIFICAR NOTAS -->
+    <!-- ========================= -->
+
+    <h3> Classificação de Nota </h3>
+    <label> Verificar a Nota: </label>
+    <input type="text" id="nota">
+    <br><br>
+    <input type="button" value="Classificação" onclick="notaClasse()">
+
+    <p id="respostadanota"></p>
+
+
+    <script>
+
+        // =========================
+        // FUNÇÃO MÉDIA ARITMÉTICA
+        // =========================
+        function MedArit() {
+
+            let num1 = Number(document.getElementById("med-num-1").value);
+            let num2 = Number(document.getElementById("med-num-2").value);
+
+            let resultado = (num1 + num2) / 2;
+
+            document.getElementById("resultadoMedia").innerHTML = ("A média aritmética é " + resultado);
+        }
+
+        // =========================
+        // FUNÇÃO POTÊNCIA
+        // =========================
+        function calcularPotencia() {
+
+            let base = Number(window.prompt("Digite a Base da Exponenciação: "));
+            let expoente = Number(window.prompt("Digite o Expoente da Exponenciação: "));
+
+            let resultado = Math.pow(base, expoente);
+
+            console.log("A Expoenciação Solicitada Tem " + base + " Como Base e " + expoente + " Como Expoente Resultou em " + resultado + ".");
+        }
+
+        // =========================
+        // FUNÇÃO ANO BISSEXTO
+        // =========================
+        function verificacaobissexto() {
+
+            let ano = Number(document.getElementById("Ano-Atual").value);
+
+            if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)) {
+                document.getElementById("resultadoAno").innerHTML = "O ano é bissexto";
+            } else {
+                document.getElementById("resultadoAno").innerHTML = "O ano não é bissexto";
+            }
+        }
+
+        // =========================
+        // FUNÇÃO PAGAMENTOS
+        // =========================
+        function pagamentos() {
+
+            let valorunidade = Number(document.getElementById("valoruni").value);
+            let qtd = Number(document.getElementById("qtd").value);
+
+            let total = valorunidade * qtd;
+
+            let selecionado = document.querySelector('input[name="pagamento"]:checked');
+
+            if (!selecionado) {
+                alert("Escolha uma forma de pagamento!");
+                return;
+            }
+
+            let forma = selecionado.value;
+
+            let desconto = 0;
+
+            if (total >= 1000) {
+                desconto += total * 0.10;
+            }
+
+            if (forma == "Pix") {
+                desconto += total * 0.10;
+            } else if (forma == "Débito") {
+                desconto += total * 0.05;
+            }
+
+            let totalfinal = total - desconto;
+
+            document.getElementById("resultado").innerHTML =
+                "Total: R$ " + total.toFixed(2) + "<br>" +
+                "Desconto: R$ " + desconto.toFixed(2) + "<br>" +
+                "Forma de Pagamento: " + forma + "<br>" +
+                "Total a Pagar: R$ " + totalfinal.toFixed(2);
+        }
+
+        // =========================
+        // FUNÇÃO NOTAS
+        // =========================
+
+        function notaClasse() {
+
+            let nota = Number(document.getElementById("nota").value);
+
+            let classificacao;
+
+            if (nota < 4) {
+                classificacao = "Reprovado";
+            } else if (nota >= 4 && nota <= 5.9) {
+                classificacao = "Recuperação"
+            } else {
+                classificacao = "Aprovado"
+            }
+
+            document.getElementById("respostadanota").innerHTML =
+                "A sua nota está classificada como: " + classificacao;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
